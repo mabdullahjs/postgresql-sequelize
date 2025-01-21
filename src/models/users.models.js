@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 
-const createUserModel = async (sequelize) => {
+const createUserModel = (sequelize) => {
     const User = sequelize.define('User',
         {
             id: {

@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 
-const createTodoModel = async (sequelize) => {
+const createTodoModel = (sequelize) => {
     const Todo = sequelize.define('Todo',
         {
             id: {

@@ -1,13 +1,21 @@
 import { createTodoModel } from './todos.models.js';
 import { createUserModel } from './users.models.js';
+import { Sequelize } from 'sequelize';
 
-const initializeModels = (sequelize) => {
-    const models = {};
+const sequelize = new Sequelize('crud', 'postgres', 'admin', {
+    host: 'localhost',
+    dialect: 'postgres',
+    logging: false
+});
 
-    models.User = createUserModel(sequelize);
-    models.Todo = createTodoModel(sequelize)
+const models = {};
+models.User = createUserModel(sequelize);
+models.Todo = createTodoModel(sequelize);
 
-    return models;
-};
+sequelize.sync({ alter: true }).then(() => {
+    console.log("All models were synchronized successfully.");
+}).catch((error) => {
+    console.error("Error syncing models:", error);
+});
 
-export { initializeModels };
+export { models , sequelize };
